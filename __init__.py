@@ -22,3 +22,4 @@ def init():
 
 
 init()
+k = input('Press enter to exit.')

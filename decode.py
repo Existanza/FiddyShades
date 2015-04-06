@@ -2,6 +2,7 @@
 __author__ = 'Deca'
 from PIL import Image
 import os
+import sys
 from datetime import datetime
 
 
@@ -35,11 +36,15 @@ def save_text(im, f, path):
     for i in range(im.size[0]):
         for j in range(im.size[1]):
             tmp_tuple = pixels[i, j]
-            print(tmp_tuple[0], end=' ')
+            # print(tmp_tuple[0], end=' ')
+            if i % (int(im.size[0]/10)) == 0 and j == 0 and i > 0:
+                print('.', end=' ')
+                sys.stdout.flush()
             ch = chr(tmp_tuple[0])
             try:
                 f.write(str(ch))
             except UnicodeEncodeError:
                 f.write(str('?'))
             del tmp_tuple
+    print('')
     print('Decoded successfully to ' + path)

@@ -3,6 +3,8 @@ __author__ = 'Deca'
 from PIL import Image
 import os
 import math
+import sys
+import random
 from datetime import datetime
 
 
@@ -43,14 +45,18 @@ def encode(im, text):
             pix = 96
         if pix == 8220 or pix == 8221 or pix == 8222:
             pix = 34
-        pixels[int(i / math.ceil(math.sqrt(len(text)))), i % math.ceil(math.sqrt(len(text)))] = (pix, 255, 255)
+        pixels[int(i / math.ceil(math.sqrt(len(text)))), i % math.ceil(math.sqrt(len(text)))] = (pix, random.randint(1, 255), random.randint(1, 255))
+        if i % int(len(text)/10) == 0 and i > 0:
+            print('.', end=' ')
+            sys.stdout.flush()
         # ch = chr(pix)
-        print(str(pix), end=' ')
+        # print(str(pix), end=' ')
         # print(str(pix) + ' ' + ch)
         # try:
         #     print(ch, end='')
         # except UnicodeEncodeError:
         #     print('?', end='')
+    print('')
     print('Image encoded successfully, trying to save it.')
     save_image(im)
 
